@@ -1,28 +1,37 @@
 <template>
   <section class="produtos-container">
-    <div v-if="products && products.length > 0" class="produtos">
-      <div v-for="product in products" :key="product.id" class="produto">
-        <RouterLink to="/">
-          <img
-            v-if="product.fotos && product.fotos.length > 0"
-            :src="product.fotos[0]"
-            :alt="product.fotos[0].titulo"
-          />
-          <p class="preco">{{ product.preco }}</p>
-          <h2 class="titulo">{{ product.nome }}</h2>
-          <p>{{ product.descricao }}</p>
-        </RouterLink>
+    <transition mode="out-in">
+      <div
+        v-if="products && products.length > 0"
+        class="produtos"
+        key="products"
+      >
+        <div v-for="product in products" :key="product.id" class="produto">
+          <RouterLink to="/">
+            <img
+              v-if="product.fotos && product.fotos.length > 0"
+              :src="product.fotos[0]"
+              :alt="product.fotos[0].titulo"
+            />
+            <p class="preco">{{ product.preco }}</p>
+            <h2 class="titulo">{{ product.nome }}</h2>
+            <p>{{ product.descricao }}</p>
+          </RouterLink>
+        </div>
+        <PaginateProducts :totalProducts="totalProducts" :perPage="perPage" />
       </div>
-      <PaginateProducts :totalProducts="totalProducts" :perPage="perPage" />
-    </div>
-    <div v-else-if="products && products.length === 0">
-      <p class="sem-resultados">
-        Busca sem resultados. Tente buscar outro termo.
-      </p>
-    </div>
-    <div v-else>
-      <LoadingPage />
-    </div>
+      <div
+        v-else-if="products && products.length === 0"
+        key="products-not-found"
+      >
+        <p class="sem-resultados">
+          Busca sem resultados. Tente buscar outro termo.
+        </p>
+      </div>
+      <div v-else key="loading">
+        <LoadingPage />
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -39,7 +48,7 @@ const route = useRoute();
 
 const products = ref(null);
 const totalProducts = ref(0);
-const perPage = ref(2);
+const perPage = ref(9);
 
 const url = computed(() => {
   return `/produtos/?_limit=${perPage.value}` + serialize(route.query);
