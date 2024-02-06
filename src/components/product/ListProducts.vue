@@ -7,7 +7,7 @@
         key="products"
       >
         <div v-for="product in products" :key="product.id" class="produto">
-          <RouterLink to="/">
+          <RouterLink :to="{ name: 'product', params: { id: product.id } }">
             <img
               v-if="product.fotos && product.fotos.length > 0"
               :src="product.fotos[0]"
@@ -56,13 +56,12 @@ const url = computed(() => {
 
 const getProducts = () => {
   products.value = null;
-  setTimeout(() => {
-    api.get(url.value).then((response) => {
-      console.log("response", response);
-      products.value = response.data;
-      totalProducts.value = Number(response.headers["x-total-count"]);
-    });
-  }, 2000);
+
+  api.get(url.value).then((response) => {
+    console.log("response", response);
+    products.value = response.data;
+    totalProducts.value = Number(response.headers["x-total-count"]);
+  });
 };
 
 onBeforeMount(() => {
