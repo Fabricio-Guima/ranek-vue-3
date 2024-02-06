@@ -16,10 +16,10 @@ const router = createRouter({
       props: true,
     },
     {
-      path: "/about",
-      name: "about",
+      path: "/login",
+      name: "login",
 
-      component: () => import("../views/HomeView.vue"),
+      component: () => import("../views/LoginView.vue"),
     },
   ],
 });
