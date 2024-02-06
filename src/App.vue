@@ -1,8 +1,11 @@
 <template>
   <div></div>
   <Header />
+
   <main id="main">
-    <RouterView />
+    <transition mode="out-in">
+      <RouterView />
+    </transition>
   </main>
   <Footer />
 </template>
