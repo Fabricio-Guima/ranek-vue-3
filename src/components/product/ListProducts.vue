@@ -13,11 +13,15 @@
           <p>{{ product.descricao }}</p>
         </RouterLink>
       </div>
+      <PaginateProducts :totalProducts="totalProducts" :perPage="perPage" />
     </div>
-    <div v-else-if="products">
+    <div v-else-if="products && products.length === 0">
       <p class="sem-resultados">
         Busca sem resultados. Tente buscar outro termo.
       </p>
+    </div>
+    <div v-else>
+      <LoadingPage />
     </div>
   </section>
 </template>
@@ -27,20 +31,29 @@ import { onBeforeMount, ref, computed, watch } from "vue";
 import { api } from "@/services/api.js";
 import { useRouter, useRoute } from "vue-router";
 import { serialize } from "@/helpers/helpers.js";
+import PaginateProducts from "@/components/product/PaginateProducts.vue";
+import LoadingPage from "@/components/LoadingPage.vue";
 
 const router = useRouter();
 const route = useRoute();
 
-const products = ref([]);
+const products = ref(null);
+const totalProducts = ref(0);
+const perPage = ref(2);
 
 const url = computed(() => {
-  return "/produtos/?_limit=10" + serialize(route.query);
+  return `/produtos/?_limit=${perPage.value}` + serialize(route.query);
 });
 
 const getProducts = () => {
-  api.get(url.value).then((response) => {
-    products.value = response.data;
-  });
+  products.value = null;
+  setTimeout(() => {
+    api.get(url.value).then((response) => {
+      console.log("response", response);
+      products.value = response.data;
+      totalProducts.value = Number(response.headers["x-total-count"]);
+    });
+  }, 2000);
 };
 
 onBeforeMount(() => {
