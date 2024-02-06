@@ -8,8 +8,6 @@
       placeholder="Buscar..."
     />
     <input type="submit" name="seek" id="seek" />
-
-    {{ search }}
   </form>
 </template>
 
