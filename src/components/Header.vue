@@ -4,12 +4,25 @@
       <RouterLink to="/" class="logo">
         <img src="@/assets/svg/ranek.svg" alt="Ranek ecommerce" />
       </RouterLink>
-      <RouterLink class="btn" to="/login">Vender / Login</RouterLink>
+      <RouterLink
+        v-if="userStore.isLogged"
+        class="btn"
+        :to="{ name: 'user' }"
+        >{{ name }}</RouterLink
+      >
+      <RouterLink v-else class="btn" to="/login">Vender / Login</RouterLink>
     </nav>
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { useUserStore } from "@/stores/user";
+import { computed } from "vue";
+
+const userStore = useUserStore();
+
+const name = computed(() => userStore.user?.value?.nome.replace(/ .*/, ""));
+</script>
 
 <style scoped>
 nav {
