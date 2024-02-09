@@ -14,7 +14,7 @@
     </p>
     <RegisterUser />
     <p>{{ userStore.isLogged }}</p>
-    <p>{{ userStore.user.value }}</p>
+    <p>{{ userStore.user }}</p>
   </section>
 </template>
 

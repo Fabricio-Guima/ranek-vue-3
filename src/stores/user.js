@@ -14,7 +14,8 @@ export const useUserStore = defineStore("user", () => {
     api
       .get(`/users/${email}`)
       .then((response) => {
-        user.value = response.data;
+        Object.assign(user, { ...response.data });
+        console.log("user reactive: ", user);
         router.push({ name: "user" });
       })
       .catch((error) => console.log("error login", error));

@@ -21,7 +21,7 @@ import { computed } from "vue";
 
 const userStore = useUserStore();
 
-const name = computed(() => userStore.user?.value?.nome.replace(/ .*/, ""));
+const name = computed(() => userStore.user.nome?.replace(/ .*/, ""));
 </script>
 
 <style scoped>
