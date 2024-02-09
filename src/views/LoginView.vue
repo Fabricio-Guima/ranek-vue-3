@@ -13,17 +13,27 @@
       <a href="/" target="_blank">Esqueceu a senha? Clique aqui.</a>
     </p>
     <RegisterUser />
+    <p>{{ userStore.isLogged }}</p>
+    <p>{{ userStore.user.value }}</p>
   </section>
 </template>
 
 <script setup>
 import RegisterUser from "@/components/RegisterUser.vue";
 import { reactive, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@/stores/user.js";
+
+const userStore = useUserStore();
+
 const login = reactive({
   email: "fabricioguimaraes55@gmail.com",
   password: "password",
 });
-const signin = () => {};
+const signin = () => {
+  userStore.isLogged = true;
+  userStore.getUser(login.email);
+};
 </script>
 
 <style scoped>
