@@ -26,7 +26,6 @@ const getProducts = () => {
       q: search.value,
     },
   });
-  console.log("getProducts");
 };
 </script>
 
