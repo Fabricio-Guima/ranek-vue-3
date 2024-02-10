@@ -59,7 +59,6 @@ const getProducts = () => {
   products.value = null;
 
   api.get(url.value).then((response) => {
-    console.log("response", response);
     products.value = response.data;
     totalProducts.value = Number(response.headers["x-total-count"]);
   });
