@@ -1,5 +1,4 @@
 <template>
-  <div></div>
   <Header />
 
   <main id="main">
