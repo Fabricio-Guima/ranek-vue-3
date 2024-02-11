@@ -43,15 +43,19 @@
 
 <script setup>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { getCep } from "@/services/cep.js";
+
+const router = useRouter();
 const userStore = useUserStore();
 
 const user = reactive({});
 
-const createAccount = () => {
+const createAccount = async () => {
   userStore.setUser(user);
   userStore.createUser();
+  router.push({ name: "user" });
 };
 
 const fillAddress = () => {
