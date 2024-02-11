@@ -17,11 +17,13 @@
 </template>
 
 <script setup>
-import RegisterUser from "@/components/user/RegisterUser.vue";
 import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user.js";
+import RegisterUser from "@/components/user/RegisterUser.vue";
 
+const router = useRouter();
 const userStore = useUserStore();
 
 const login = reactive({
@@ -32,6 +34,7 @@ const signin = () => {
   userStore.isLogged = true;
   userStore.setUser(login);
   userStore.getUser(login.email);
+  router.push({ name: "user" });
 };
 </script>
 
