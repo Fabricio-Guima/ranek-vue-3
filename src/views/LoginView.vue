@@ -13,13 +13,11 @@
       <a href="/" target="_blank">Esqueceu a senha? Clique aqui.</a>
     </p>
     <RegisterUser />
-    <p>{{ userStore.isLogged }}</p>
-    <p>{{ userStore.user }}</p>
   </section>
 </template>
 
 <script setup>
-import RegisterUser from "@/components/RegisterUser.vue";
+import RegisterUser from "@/components/user/RegisterUser.vue";
 import { reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/stores/user.js";
@@ -27,11 +25,12 @@ import { useUserStore } from "@/stores/user.js";
 const userStore = useUserStore();
 
 const login = reactive({
-  email: "fabricioguimaraes55@gmail.com",
+  email: "",
   password: "password",
 });
 const signin = () => {
   userStore.isLogged = true;
+  userStore.setUser(login);
   userStore.getUser(login.email);
 };
 </script>
