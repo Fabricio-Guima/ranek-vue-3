@@ -31,7 +31,6 @@ export const useUserStore = defineStore("user", () => {
       .then((response) => {
         isLogged.value = true;
         setUser(response.data);
-        router.push({ name: "user" });
       })
       .catch((error) => console.log("Erro ao criar usuário", error));
   };
