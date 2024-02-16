@@ -3,19 +3,21 @@
 
   <main id="main">
     <transition mode="out-in">
-      <RouterView />
+      <router-view />
     </transition>
   </main>
   <Footer />
 </template>
 
-<style scoped>
+<style>
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  background: #87f;
+  color: #fff;
 }
 
 nav a.router-link-exact-active:hover {
-  background-color: transparent;
+  background: #87f;
+  color: #fff;
 }
 </style>
 
