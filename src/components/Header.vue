@@ -7,7 +7,7 @@
       <RouterLink
         v-if="userStore.isLogged"
         class="btn"
-        :to="{ name: 'user' }"
+        :to="{ name: 'user.products' }"
         >{{ name }}</RouterLink
       >
       <RouterLink v-else class="btn" to="/login">Vender / Login</RouterLink>
