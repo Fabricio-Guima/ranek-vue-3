@@ -15,7 +15,6 @@ export const useUserStore = defineStore("user", () => {
       .get(`/users/${email}`)
       .then((response) => {
         setUser(response.data);
-        router.push({ name: "user" });
       })
       .catch((error) => console.log("error login", error));
   };
@@ -35,11 +34,25 @@ export const useUserStore = defineStore("user", () => {
       .catch((error) => console.log("Erro ao criar usuário", error));
   };
 
+  const destroyUser = () => {
+    if (Object.keys(user).length > 0) {
+      for (const key in user) {
+        delete user[key];
+      }
+    }
+  };
+
+  const signout = () => {
+    destroyUser();
+    isLogged.value = false;
+  };
+
   return {
     isLogged,
     user,
     getUser,
     setUser,
     createUser,
+    signout,
   };
 });
