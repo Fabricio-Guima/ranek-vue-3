@@ -34,7 +34,7 @@ const signin = () => {
   userStore.isLogged = true;
   userStore.setUser(login);
   userStore.getUser(login.email);
-  router.push({ name: "user" });
+  router.push({ name: "home" });
 };
 </script>
 
