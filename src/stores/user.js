@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", () => {
   const router = useRouter();
   const isLogged = ref(false);
   let user = reactive({});
+  const userProducts = ref([]);
 
   const getUser = (payload) => {
     const email = payload;
@@ -22,6 +23,21 @@ export const useUserStore = defineStore("user", () => {
   const setUser = (payload) => {
     user.id = payload.email;
     Object.assign(user, { ...payload });
+  };
+
+  const getUserProducts = () => {
+    api.get(`/produtos?user_id=${user.id}`).then((response) => {
+      setUserProducts(response.data);
+    });
+  };
+
+  const setUserProducts = (payload) => {
+    userProducts.value = payload;
+    console.log("userProducts", userProducts);
+  };
+
+  const addUserProducts = (payload) => {
+    userProducts.unshift(payload);
   };
 
   const createUser = () => {
@@ -50,9 +66,13 @@ export const useUserStore = defineStore("user", () => {
   return {
     isLogged,
     user,
+    userProducts,
     getUser,
     setUser,
     createUser,
     signout,
+    getUserProducts,
+    setUserProducts,
+    addUserProducts,
   };
 });
