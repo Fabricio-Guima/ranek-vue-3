@@ -13,7 +13,7 @@
               :src="product.fotos[0]"
               :alt="product.fotos[0].titulo"
             />
-            <p class="preco">{{ formatNumberToPtBr(product.preco) }}</p>
+            <p class="preco">{{ formattedPrice(product.preco) }}</p>
             <h2 class="titulo">{{ product.nome }}</h2>
             <p>{{ product.descricao }}</p>
           </RouterLink>
@@ -40,7 +40,7 @@ import { onBeforeMount, ref, computed, watch } from "vue";
 import { api } from "@/services/api.js";
 import { useRouter, useRoute } from "vue-router";
 import { serialize } from "@/helpers/helpers.js";
-import { formatNumberToPtBr } from "@/helpers/convertToBRL.js";
+import { formattedPrice } from "@/helpers/convertToBRL.js";
 import PaginateProducts from "@/components/product/PaginateProducts.vue";
 import LoadingPage from "@/components/LoadingPage.vue";
 
