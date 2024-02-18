@@ -8,7 +8,7 @@
       </ul>
       <div class="info">
         <h1>{{ product.nome }}</h1>
-        <p class="preco">{{ formatNumberToPtBr(product.preco) }}</p>
+        <p class="preco">{{ formattedPrice(product.preco) }}</p>
         <p class="descricao">{{ product.descricao }}</p>
         <button class="btn" v-if="product.vendido === 'false'">Comprar</button>
         <button v-else class="btn" disabled>Produto vendido</button>
@@ -22,7 +22,7 @@
 import { api } from "@/services/api";
 import { computed, onBeforeMount, ref } from "vue";
 import LoadingPage from "@/components/LoadingPage.vue";
-import { formatNumberToPtBr } from "@/helpers/convertToBRL.js";
+import { formattedPrice } from "@/helpers/convertToBRL.js";
 
 const props = defineProps({
   id: String,
