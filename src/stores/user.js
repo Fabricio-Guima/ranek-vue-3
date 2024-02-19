@@ -30,10 +30,8 @@ export const useUserStore = defineStore("user", () => {
       setUserProducts(response.data);
     });
   };
-
   const setUserProducts = (payload) => {
     userProducts.value = payload;
-    console.log("userProducts", userProducts);
   };
 
   const addUserProducts = (payload) => {
