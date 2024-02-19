@@ -30,6 +30,7 @@ export const useUserStore = defineStore("user", () => {
       setUserProducts(response.data);
     });
   };
+
   const setUserProducts = (payload) => {
     userProducts.value = payload;
   };
@@ -39,6 +40,7 @@ export const useUserStore = defineStore("user", () => {
   };
 
   const createUser = () => {
+    console.log("createUser", user);
     api
       .post("/users", user)
       .then((response) => {
@@ -46,6 +48,17 @@ export const useUserStore = defineStore("user", () => {
         setUser(response.data);
       })
       .catch((error) => console.log("Erro ao criar usuário", error));
+  };
+
+  const editUser = () => {
+    console.log("editUser", user);
+    api
+      .put(`/users/${user.id}`, user)
+      .then((response) => {
+        isLogged.value = true;
+        setUser(response.data);
+      })
+      .catch((error) => console.log("Erro ao editar usuário", error));
   };
 
   const destroyUser = () => {
@@ -68,6 +81,7 @@ export const useUserStore = defineStore("user", () => {
     getUser,
     setUser,
     createUser,
+    editUser,
     signout,
     getUserProducts,
     setUserProducts,
