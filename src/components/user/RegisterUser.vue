@@ -12,7 +12,13 @@
       </button>
 
       <FormUser v-else key="form-user">
-        <button class="btn btn-form">Cria conta</button>
+        <button
+          type="submit"
+          class="btn btn-form"
+          @click.prevent="createAccount"
+        >
+          Cria conta
+        </button>
       </FormUser>
     </transition>
   </section>
@@ -21,8 +27,17 @@
 <script setup>
 import { ref } from "vue";
 import FormUser from "@/components/user/FormUser.vue";
+import { useUserStore } from "@/stores/user";
+import { useRouter, useRoute } from "vue-router";
 
 const showFormUser = ref(false);
+const userStore = useUserStore();
+const router = useRouter();
+
+const createAccount = async () => {
+  userStore.createUser();
+  router.push({ name: "user.products" });
+};
 </script>
 
 <style scoped>
