@@ -45,7 +45,9 @@ import { reactive, ref } from "vue";
 
 const userStore = useUserStore();
 
-const produto = reactive({});
+const produto = reactive({
+  vendido: "false",
+});
 const createFormProduct = ref(null);
 
 const photoUploadPreview = ref(null);
