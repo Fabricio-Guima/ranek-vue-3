@@ -33,11 +33,14 @@ nav {
   box-shadow: 0 2px 4px rgba(30, 60, 90, 0.1);
 }
 
-.logo {
+.logo,
+.logo:hover {
   padding: 10px 0;
+  background: #fff;
 }
 
 .logo img {
   width: 90px;
+  background: #fff;
 }
 </style>
