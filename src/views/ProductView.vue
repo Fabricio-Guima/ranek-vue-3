@@ -10,7 +10,13 @@
         <h1>{{ product.nome }}</h1>
         <p class="preco">{{ formattedPrice(product.preco) }}</p>
         <p class="descricao">{{ product.descricao }}</p>
-        <button class="btn" v-if="product.vendido === 'false'">Comprar</button>
+
+        <transition mode="out-in" v-if="product.vendido === 'false'">
+          <button v-if="!finalizar" @click="finalizar = !finalizar" class="btn">
+            Comprar
+          </button>
+          <FinalizePurchase v-else :product="product" />
+        </transition>
         <button v-else class="btn" disabled>Produto vendido</button>
       </div>
     </div>
@@ -22,6 +28,8 @@
 import { api } from "@/services/api";
 import { computed, onBeforeMount, ref } from "vue";
 import LoadingPage from "@/components/LoadingPage.vue";
+import FinalizePurchase from "@/components/product/FinalizePurchase.vue";
+
 import { formattedPrice } from "@/helpers/convertToBRL.js";
 
 const props = defineProps({
@@ -29,6 +37,7 @@ const props = defineProps({
 });
 
 const product = ref(null);
+const finalizar = ref(false);
 
 const getProduct = () => {
   api
