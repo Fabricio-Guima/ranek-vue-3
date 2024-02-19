@@ -13,6 +13,10 @@ export const api = {
     return axiosIntance.post(endpoint, body);
   },
 
+  put(endpoint, body) {
+    return axiosIntance.put(endpoint, body);
+  },
+
   delete(endpoint) {
     return axiosIntance.delete(endpoint);
   },
