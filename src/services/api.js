@@ -12,4 +12,8 @@ export const api = {
   post(endpoint, body) {
     return axiosIntance.post(endpoint, body);
   },
+
+  delete(endpoint) {
+    return axiosIntance.delete(endpoint);
+  },
 };
