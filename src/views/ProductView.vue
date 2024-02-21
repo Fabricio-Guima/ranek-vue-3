@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div v-if="product != null" class="produto">
-      <ul class="fotos" v-if="product.fotos">
-        <li v-for="(foto, index) in product.fotos" :key="index">
-          <img :src="foto.src" :alt="foto.titulo" />
+    <div v-if="product" class="produto">
+      <ul class="fotos" v-if="product.fotos && product.fotos.length > 0">
+        <li v-for="(foto, index) in product.fotos" :key="'fotos' + index">
+          <img :src="foto?.src" :alt="foto?.titulo" />
         </li>
       </ul>
       <div class="info">
@@ -59,6 +59,14 @@ onBeforeMount(() => {
   padding: 60px 20px;
   margin: 0 auto;
 }
+.fotos {
+  grid-row: 1 / 3;
+}
+
+.info {
+  position: sticky;
+  top: 20px;
+}
 .preco {
   color: #e80;
   font-weight: bold;
@@ -67,6 +75,12 @@ onBeforeMount(() => {
 }
 .descricao {
   font-size: 1.2rem;
+}
+
+img {
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(30, 60, 60, 0.2);
+  border-radius: 4px;
 }
 
 .btn {
