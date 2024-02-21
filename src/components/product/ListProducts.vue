@@ -10,7 +10,7 @@
           <RouterLink :to="{ name: 'product', params: { id: product.id } }">
             <img
               v-if="product.fotos && product.fotos.length > 0"
-              :src="product.fotos[0]"
+              :src="product.fotos[0].src"
               :alt="product.fotos[0].titulo"
             />
             <p class="preco">{{ formattedPrice(product.preco) }}</p>
@@ -46,6 +46,8 @@ import LoadingPage from "@/components/LoadingPage.vue";
 
 const router = useRouter();
 const route = useRoute();
+
+const img = "notebook.jpg";
 
 const products = ref(null);
 const totalProducts = ref(0);
