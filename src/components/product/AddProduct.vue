@@ -46,6 +46,7 @@ import { reactive, ref } from "vue";
 const userStore = useUserStore();
 
 const produto = reactive({
+  fotos: [],
   vendido: "false",
 });
 const createFormProduct = ref(null);
@@ -65,7 +66,10 @@ const formatterProduct = () => {
 };
 
 const handleUploadPhoto = (e) => {
-  produto.fotos = e.target.files[0];
+  produto.fotos.push({
+    src: "src/assets/img/notebook.jpg",
+    titulo: "Foto do produto",
+  });
 
   const reader = new FileReader();
   reader.onload = (event) => {
@@ -79,7 +83,7 @@ const resetInput = () => {
   produto.nome = "";
   produto.preco = "";
   produto.descricao = "";
-  produto.fotos = null;
+  produto.fotos = [];
   photoUploadPreview.value = false;
   createFormProduct.value.reset();
 };
