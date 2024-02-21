@@ -2,6 +2,7 @@
   <section>
     <div v-if="purchases">
       <h2>Compras</h2>
+
       <div
         class="produtos-wrapper"
         v-for="(purchase, index) in purchases"
