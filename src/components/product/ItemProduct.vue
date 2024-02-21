@@ -5,11 +5,10 @@
       :to="{ name: 'product', params: { id: product.id } }"
     >
       <img
-        v-if="product.fotos"
+        v-if="product.fotos && product.fotos.length > 0"
         :src="product.fotos[0]?.src"
         :alt="product.fotos[0]?.titulo"
       />
-      <p>Ver Produto</p>
     </router-link>
     <div class="info">
       <p class="preco">{{ formattedPrice(product.preco) }}</p>
